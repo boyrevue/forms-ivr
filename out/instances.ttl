@@ -1,0 +1,233 @@
+@prefix : <http://example.org/form#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+:Form a rdfs:Class .
+:Field a rdfs:Class .
+:NumberField rdfs:subClassOf :Field .
+:SelectField rdfs:subClassOf :Field .
+:RadioField  rdfs:subClassOf :Field .
+:VariantsField rdfs:subClassOf :Field .
+:DateField rdfs:subClassOf :Field .
+:TextField rdfs:subClassOf :Field .
+:Option a rdfs:Class .
+
+:hasField a rdf:Property ; rdfs:domain :Form ; rdfs:range :Field .
+:hasOption a rdf:Property ; rdfs:domain :Field ; rdfs:range :Option .
+:name a rdf:Property ; rdfs:range xsd:string .
+:htmlId a rdf:Property ; rdfs:range xsd:string .
+:value a rdf:Property ; rdfs:range xsd:string .
+:controlType a rdf:Property ; rdfs:range xsd:string .
+:question a rdf:Property ; rdfs:range xsd:string .
+:helpText a rdf:Property ; rdfs:range xsd:string .
+
+:form1 a :Form ; rdfs:label "form1" .
+
+:form1 :hasField :is_vehicle_modified .
+:is_vehicle_modified a rdf:Property .
+:is_vehicle_modified a :RadioField ;
+  :question "Does the NISSAN LEAF ACENTA have any modifications?" ;
+  :name "is-vehicle-modified" ;
+  :htmlId "mint-radio-id-133" ;
+  :controlType "radio" .
+:is_vehicle_modified :hasOption :is_vehicle_modified_opt_true .
+:is_vehicle_modified_opt_true a :Option ; :value "true" ; rdfs:label "Yes" .
+:is_vehicle_modified :hasOption :is_vehicle_modified_opt_false .
+:is_vehicle_modified_opt_false a :Option ; :value "false" ; rdfs:label "No" .
+:is_vehicle_modified :helpText "What does this mean?If you or a previous owner has made a change from the manufacturer's original specification, such as alloy wheels, air conditioning, bodywork, exhaust system, suspension, tow bar, roof racks or tinted windows, add it here.If you’re unsure if your car’s been modified, check its previous history to find out." .
+
+:form1 :hasField :modifications .
+:modifications a rdf:Property .
+:modifications a :Field ;
+  :question "How has the car been modified?" ;
+  :name "modifications" ;
+  :htmlId "1" ;
+  :controlType "checkbox" .
+:modifications :hasOption :modifications_opt_on .
+:modifications_opt_on a :Option ; :value "on" ; rdfs:label "Rear Spoiler/Aerofoil" .
+
+:form1 :hasField :c_1065897e .
+:c_1065897e a rdf:Property .
+:c_1065897e a :SelectField ;
+  :question "How has the car been modified?" ;
+  :controlType "select" .
+:c_1065897e :hasOption :c_1065897e_opt_0 .
+:c_1065897e_opt_0 a :Option ; :value "0" ; rdfs:label "Spoilers / Bodykits" .
+:c_1065897e :hasOption :c_1065897e_opt_1 .
+:c_1065897e_opt_1 a :Option ; :value "1" ; rdfs:label "Body modifications" .
+:c_1065897e :hasOption :c_1065897e_opt_2 .
+:c_1065897e_opt_2 a :Option ; :value "2" ; rdfs:label "Paintwork" .
+:c_1065897e :hasOption :c_1065897e_opt_3 .
+:c_1065897e_opt_3 a :Option ; :value "3" ; rdfs:label "Suspension / Steering" .
+:c_1065897e :hasOption :c_1065897e_opt_4 .
+:c_1065897e_opt_4 a :Option ; :value "4" ; rdfs:label "Wheels / Tyres" .
+:c_1065897e :hasOption :c_1065897e_opt_5 .
+:c_1065897e_opt_5 a :Option ; :value "5" ; rdfs:label "Engine / Transmission" .
+:c_1065897e :hasOption :c_1065897e_opt_6 .
+:c_1065897e_opt_6 a :Option ; :value "6" ; rdfs:label "Brakes" .
+:c_1065897e :hasOption :c_1065897e_opt_7 .
+:c_1065897e_opt_7 a :Option ; :value "7" ; rdfs:label "Accessories" .
+
+:form1 :hasField :vehicleValue .
+:vehicleValue a rdf:Property .
+:vehicleValue a :NumberField ;
+  :question "Roughly how much is the NISSAN LEAF ACENTA worth?" ;
+  :name "vehicleValue" ;
+  :htmlId "vehicle-value-control" ;
+  :controlType "number" .
+:vehicleValue :helpText "How come there's a value already there?To make things easier for you, we use a car industry valuation service to show you how much the car is worth.Not happy with the value?The insurer will normally pay the trade value we have shown you. However, if you think the value is wrong, you can change it.What if there is no value in here?Tell us how much the car would be worth if you sold it today. Or tell us how much you’re buying the car for." .
+
+:form1 :hasField :is_purchased .
+:is_purchased a rdf:Property .
+:is_purchased a :RadioField ;
+  :question "Do you have the NISSAN LEAF ACENTA yet?" ;
+  :name "is-purchased" ;
+  :htmlId "mint-radio-id-137" ;
+  :controlType "radio" .
+:is_purchased :hasOption :is_purchased_opt_true .
+:is_purchased_opt_true a :Option ; :value "true" ; rdfs:label "Yes" .
+:is_purchased :hasOption :is_purchased_opt_false .
+:is_purchased_opt_false a :Option ; :value "false" ; rdfs:label "No" .
+:is_purchased :helpText "What if you don't have the car yet?If you’re looking for insurance for a car you haven’t got yet, that’s no problem – you can search by the make and model of car you’d like." .
+
+:form1 :hasField :registered_owner_keeper .
+:registered_owner_keeper a rdf:Property .
+:registered_owner_keeper a :RadioField ;
+  :question "Are you the owner and registered keeper of the NISSAN LEAF ACENTA (or will you be)?" ;
+  :name "registered-owner-keeper" ;
+  :htmlId "mint-radio-id-141" ;
+  :controlType "radio" .
+:registered_owner_keeper :hasOption :registered_owner_keeper_opt_true .
+:registered_owner_keeper_opt_true a :Option ; :value "true" ; rdfs:label "Yes" .
+:registered_owner_keeper :hasOption :registered_owner_keeper_opt_false .
+:registered_owner_keeper_opt_false a :Option ; :value "false" ; rdfs:label "No" .
+:registered_owner_keeper :helpText "What's the difference between owner and registered keeper?If your name is on the V5C vehicle registration certificate (often called the logbook), you're the registered keeper.If you bought the car, or received it as a gift, you will own it too.Sometimes a company (such as a leasing company) or another person might own a car and be the registered keeper of the car, so please make sure you check your V5C." .
+
+:form1 :hasField :usage_type_id .
+:usage_type_id a rdf:Property .
+:usage_type_id a :VariantsField ;
+  :question "How do you use the NISSAN LEAF ACENTA?" ;
+  :name "usage-type-id" ;
+  :htmlId "mint-radio-id-144" ;
+  :controlType "variants" .
+:usage_type_id :hasOption :usage_type_id_opt_1 .
+:usage_type_id_opt_1 a :Option ; :value "1" ; rdfs:label "Social only" .
+:usage_type_id :hasOption :usage_type_id_opt_2 .
+:usage_type_id_opt_2 a :Option ; :value "2" ; rdfs:label "Social and commuting" .
+:usage_type_id :hasOption :usage_type_id_opt__other_ .
+:usage_type_id_opt__other_ a :Option ; :value "_other_" ; rdfs:label "Other options" .
+:usage_type_id :hasOption :usage_type_id_opt_Social_commuting_and_business_uses .
+:usage_type_id_opt_Social_commuting_and_business_uses a :Option ; :value "" ; rdfs:label "Social, commuting and business uses" .
+:usage_type_id :hasOption :usage_type_id_opt_3 .
+:usage_type_id_opt_3 a :Option ; :value "3" ; rdfs:label "Business use by the policyholder" .
+:usage_type_id :hasOption :usage_type_id_opt_4 .
+:usage_type_id_opt_4 a :Option ; :value "4" ; rdfs:label "Business use by the policyholder's spouse/civil partner" .
+:usage_type_id :hasOption :usage_type_id_opt_5 .
+:usage_type_id_opt_5 a :Option ; :value "5" ; rdfs:label "Business use by the policyholder and their spouse/civil partner" .
+:usage_type_id :hasOption :usage_type_id_opt_6 .
+:usage_type_id_opt_6 a :Option ; :value "6" ; rdfs:label "Business use by any driver" .
+:usage_type_id :helpText "Why does this matter? Insurers look at how you and the named drivers on the policy use your car to work out how much risk there is in insuring it. We'll ask you about the other people you’d like to add to your policy soon. If your partner uses the car for business, but you're not married, choose the final option. See which option most closely matches your needs: Social only – Choose this if you and the named drivers on the policy only use the car for personal driving and never drive to work or to where you study, and never drive for work either. Social and commuting – Choose this if you or a named driver drives to and from a single place of work or where you study, but do no other business travel. Business use by the policyholder – choose this if you use the car on business away from your single place of work. Business use by the policyholder's spouse/civil partner – choose this if your husband or wife uses the car on business away from their single place of work. Business use by the policyholder and their spouse/civil partner – choose this if you both use the car on business away from your individual places of work. Business use by any driver – choose this if anyone else you’re insuring to drive the car uses it for business." .
+
+:form1 :hasField :personalMilesPerYear .
+:personalMilesPerYear a rdf:Property .
+:personalMilesPerYear a :NumberField ;
+  :question "How many personal miles does the car do a year?" ;
+  :name "personalMilesPerYear" ;
+  :htmlId "personal-miles-per-year-control" ;
+  :controlType "number" .
+:personalMilesPerYear :helpText "Wondering how to work this out?We're after the number of miles you think your car will do over the next year.Working out the number of miles your car’s done this year is probably a good starting point. Think about how many miles you usually drive per day or per week, then multiply it up to get a yearly figure. Add in any longer trips, such as visits, weekends away or holidays." .
+
+:form1 :hasField :daytime_storage_location_id .
+:daytime_storage_location_id a rdf:Property .
+:daytime_storage_location_id a :VariantsField ;
+  :question "Where is the NISSAN LEAF ACENTA kept during the day?" ;
+  :name "daytime-storage-location-id" ;
+  :htmlId "mint-radio-id-151" ;
+  :controlType "variants" .
+:daytime_storage_location_id :hasOption :daytime_storage_location_id_opt_8 .
+:daytime_storage_location_id_opt_8 a :Option ; :value "8" ; rdfs:label "On a driveway" .
+:daytime_storage_location_id :hasOption :daytime_storage_location_id_opt_6 .
+:daytime_storage_location_id_opt_6 a :Option ; :value "6" ; rdfs:label "Office/Factory car park" .
+:daytime_storage_location_id :hasOption :daytime_storage_location_id_opt_10 .
+:daytime_storage_location_id_opt_10 a :Option ; :value "10" ; rdfs:label "On the street (away from home)" .
+:daytime_storage_location_id :hasOption :daytime_storage_location_id_opt__other_ .
+:daytime_storage_location_id_opt__other_ a :Option ; :value "_other_" ; rdfs:label "Other options" .
+:daytime_storage_location_id :hasOption :daytime_storage_location_id_opt_Select_from_more_options .
+:daytime_storage_location_id_opt_Select_from_more_options a :Option ; :value "" ; rdfs:label "Select from more options" .
+:daytime_storage_location_id :hasOption :daytime_storage_location_id_opt_1 .
+:daytime_storage_location_id_opt_1 a :Option ; :value "1" ; rdfs:label "Carport" .
+:daytime_storage_location_id :hasOption :daytime_storage_location_id_opt_2 .
+:daytime_storage_location_id_opt_2 a :Option ; :value "2" ; rdfs:label "Locked garage" .
+:daytime_storage_location_id :hasOption :daytime_storage_location_id_opt_3 .
+:daytime_storage_location_id_opt_3 a :Option ; :value "3" ; rdfs:label "On the street (near home)" .
+:daytime_storage_location_id :hasOption :daytime_storage_location_id_opt_4 .
+:daytime_storage_location_id_opt_4 a :Option ; :value "4" ; rdfs:label "Third party premises" .
+:daytime_storage_location_id :hasOption :daytime_storage_location_id_opt_5 .
+:daytime_storage_location_id_opt_5 a :Option ; :value "5" ; rdfs:label "Locked compound" .
+:daytime_storage_location_id :hasOption :daytime_storage_location_id_opt_7 .
+:daytime_storage_location_id_opt_7 a :Option ; :value "7" ; rdfs:label "Open public car park" .
+:daytime_storage_location_id :hasOption :daytime_storage_location_id_opt_9 .
+:daytime_storage_location_id_opt_9 a :Option ; :value "9" ; rdfs:label "Secure public car park" .
+:daytime_storage_location_id :hasOption :daytime_storage_location_id_opt_11 .
+:daytime_storage_location_id_opt_11 a :Option ; :value "11" ; rdfs:label "Unlocked compound" .
+:daytime_storage_location_id :hasOption :daytime_storage_location_id_opt_12 .
+:daytime_storage_location_id_opt_12 a :Option ; :value "12" ; rdfs:label "Unlocked garage" .
+:daytime_storage_location_id :helpText "Why are we asking? Insurers look at where your car is kept during the day to work out how safe it is likely to be while it isn't being driven. What if where I keep it varies? Insurers understand that your car is likely to be kept in different places depending on what you're doing. So pick the answer that is true for most of the time - the one that best reflects where your car is kept during the day." .
+
+:form1 :hasField :overnight_storage_location_id .
+:overnight_storage_location_id a rdf:Property .
+:overnight_storage_location_id a :VariantsField ;
+  :question "Where is the NISSAN LEAF ACENTA kept during the night?" ;
+  :name "overnight-storage-location-id" ;
+  :htmlId "mint-radio-id-157" ;
+  :controlType "variants" .
+:overnight_storage_location_id :hasOption :overnight_storage_location_id_opt_2 .
+:overnight_storage_location_id_opt_2 a :Option ; :value "2" ; rdfs:label "Locked garage" .
+:overnight_storage_location_id :hasOption :overnight_storage_location_id_opt_8 .
+:overnight_storage_location_id_opt_8 a :Option ; :value "8" ; rdfs:label "On a driveway" .
+:overnight_storage_location_id :hasOption :overnight_storage_location_id_opt_3 .
+:overnight_storage_location_id_opt_3 a :Option ; :value "3" ; rdfs:label "On the street (near home)" .
+:overnight_storage_location_id :hasOption :overnight_storage_location_id_opt_10 .
+:overnight_storage_location_id_opt_10 a :Option ; :value "10" ; rdfs:label "On the street (away from home)" .
+:overnight_storage_location_id :hasOption :overnight_storage_location_id_opt__other_ .
+:overnight_storage_location_id_opt__other_ a :Option ; :value "_other_" ; rdfs:label "Other options" .
+:overnight_storage_location_id :hasOption :overnight_storage_location_id_opt_Select_from_more_options .
+:overnight_storage_location_id_opt_Select_from_more_options a :Option ; :value "" ; rdfs:label "Select from more options" .
+:overnight_storage_location_id :hasOption :overnight_storage_location_id_opt_4 .
+:overnight_storage_location_id_opt_4 a :Option ; :value "4" ; rdfs:label "Third party premises" .
+:overnight_storage_location_id :hasOption :overnight_storage_location_id_opt_5 .
+:overnight_storage_location_id_opt_5 a :Option ; :value "5" ; rdfs:label "Locked compound" .
+:overnight_storage_location_id :hasOption :overnight_storage_location_id_opt_6 .
+:overnight_storage_location_id_opt_6 a :Option ; :value "6" ; rdfs:label "Office/Factory car park" .
+:overnight_storage_location_id :hasOption :overnight_storage_location_id_opt_7 .
+:overnight_storage_location_id_opt_7 a :Option ; :value "7" ; rdfs:label "Open public car park" .
+:overnight_storage_location_id :hasOption :overnight_storage_location_id_opt_9 .
+:overnight_storage_location_id_opt_9 a :Option ; :value "9" ; rdfs:label "Secure public car park" .
+:overnight_storage_location_id :hasOption :overnight_storage_location_id_opt_12 .
+:overnight_storage_location_id_opt_12 a :Option ; :value "12" ; rdfs:label "Unlocked garage" .
+:overnight_storage_location_id :hasOption :overnight_storage_location_id_opt_1 .
+:overnight_storage_location_id_opt_1 a :Option ; :value "1" ; rdfs:label "Carport" .
+:overnight_storage_location_id :hasOption :overnight_storage_location_id_opt_11 .
+:overnight_storage_location_id_opt_11 a :Option ; :value "11" ; rdfs:label "Unlocked compound" .
+:overnight_storage_location_id :helpText "Why are we asking? Cars are more likely to be broken into at night, so insurers look at how safe your car is overnight to help work out the price of your policy. What if where I keep it varies? Insurers understand that your car might be kept in different places depending on what you're doing. Pick the answer that is true for most of the time - where you most often leave your car at night." .
+
+:form1 :hasField :any_other_vehicles_id .
+:any_other_vehicles_id a rdf:Property .
+:any_other_vehicles_id a :RadioField ;
+  :question "Do you have any other cars?" ;
+  :name "any-other-vehicles-id" ;
+  :htmlId "mint-radio-id-165" ;
+  :controlType "radio" .
+:any_other_vehicles_id :hasOption :any_other_vehicles_id_opt_1 .
+:any_other_vehicles_id_opt_1 a :Option ; :value "1" ; rdfs:label "No access to any other cars" .
+:any_other_vehicles_id :hasOption :any_other_vehicles_id_opt_2 .
+:any_other_vehicles_id_opt_2 a :Option ; :value "2" ; rdfs:label "Own another car" .
+:any_other_vehicles_id :hasOption :any_other_vehicles_id_opt_3 .
+:any_other_vehicles_id_opt_3 a :Option ; :value "3" ; rdfs:label "Named driver on another policy" .
+:any_other_vehicles_id :hasOption :any_other_vehicles_id_opt_4 .
+:any_other_vehicles_id_opt_4 a :Option ; :value "4" ; rdfs:label "Company car (including social use)" .
+:any_other_vehicles_id :hasOption :any_other_vehicles_id_opt_5 .
+:any_other_vehicles_id_opt_5 a :Option ; :value "5" ; rdfs:label "Company car (excluding social use)" .
+:any_other_vehicles_id :helpText "Wondering what to choose?Let us know which of these you drive.Own another car – choose this if you have another car of your own.Named driver on another policy – choose this if you're insured to drive someone else's car.Company car, for business and social use – choose this if you use your company car for social driving too.Company car, for business use only – choose this if you use your company car only for business.Insurers don't need to know if you occasionally drive hire cars or belong to a car club, so don't worry about that." .
+

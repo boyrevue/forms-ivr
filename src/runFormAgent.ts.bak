@@ -1,0 +1,392 @@
+// src/runFormAgent.ts
+import fs from "node:fs/promises";
+import path from "node:path";
+import { spawn } from "node:child_process";
+import readline from "node:readline/promises";
+import { stdin as input, stdout as output } from "node:process";
+import { Parser, Store, DataFactory } from "n3";
+import { StateGraph, START, END } from "@langchain/langgraph";
+import { MemorySaver } from "@langchain/langgraph-checkpoint";
+
+/** Namespaces */
+const PREFIX = "http://example.org/form#";
+const SH = "http://www.w3.org/ns/shacl#";
+const XSD = "http://www.w3.org/2001/XMLSchema#";
+
+/** Project paths */
+const paths = {
+  instances: "out/instances.ttl",
+  shapes: "out/shapes.ttl",
+  answersTtl: "out/answers.ttl",
+  answersJson: "answers.json",
+  plan: "out/plan.json",
+  nextScript: "scripts/next-as-json.mjs",
+  answersToRdf: "scripts/answers-to-rdf.mjs",
+  rdfToPlan: "scripts/rdf-to-plan.mjs",
+};
+
+type PlanStatus = "complete" | "incomplete" | string;
+
+type Plan = {
+  form: string;
+  status: PlanStatus;
+  next?: { path: string; label: string } | null;
+  requiredTotal?: number;
+  missingCount?: number;
+  missing?: Array<{ path: string; label: string }>;
+};
+
+type NextInfo = {
+  /** local field name e.g. "usage_type_id" */
+  path: string;
+  label: string;
+  options: { value: string; label: string }[];
+};
+
+type AgentState = {
+  formId: string;
+  paths: typeof paths;
+
+  // RDF
+  instancesStore: Store;
+  shapesStore: Store;
+  /** fields whose sh:datatype is xsd:integer */
+  integerFields: Set<string>;
+
+  // evolving during the run
+  plan?: Plan;
+  next?: string | null; // local field name
+  question?: string | null;
+  options?: { value: string; label: string }[] | null;
+  lastAnswer?: string | null;
+};
+
+// ---------------------- utilities ----------------------
+
+async function ensureFile(filePath: string, contents = ""): Promise<void> {
+  try {
+    await fs.access(filePath);
+  } catch {
+    await fs.mkdir(path.dirname(filePath), { recursive: true });
+    await fs.writeFile(filePath, contents, "utf8");
+  }
+}
+
+async function readTTLAsStore(file: string): Promise<Store> {
+  const text = await fs.readFile(file, "utf8");
+  const store = new Store();
+  const parser = new Parser();
+  store.addQuads(parser.parse(text));
+  return store;
+}
+
+function detectIntegerFields(shapes: Store): Set<string> {
+  const set = new Set<string>();
+  const propQuads = shapes.getQuads(
+    null,
+    DataFactory.namedNode(`${SH}property`),
+    null,
+    null
+  );
+
+  for (const q of propQuads) {
+    const propertyShape = q.object;
+    const pathQ = shapes.getQuads(
+      propertyShape,
+      DataFactory.namedNode(`${SH}path`),
+      null,
+      null
+    )[0];
+    const dtypeQ = shapes.getQuads(
+      propertyShape,
+      DataFactory.namedNode(`${SH}datatype`),
+      null,
+      null
+    )[0];
+    if (!pathQ || !dtypeQ) continue;
+
+    const pathNode = pathQ.object;
+    const datatype = dtypeQ.object.value;
+
+    if (pathNode.termType !== "NamedNode") continue;
+    if (!pathNode.value.startsWith(PREFIX)) continue;
+
+    const local = pathNode.value.slice(PREFIX.length);
+    if (datatype === `${XSD}integer`) set.add(local);
+  }
+  return set;
+}
+
+async function runNode(
+  args: string[],
+  { captureStdout = true }: { captureStdout?: boolean } = {}
+): Promise<{ code: number; stdout: string; stderr: string }> {
+  return new Promise((resolve) => {
+    const p = spawn(process.execPath, args, {
+      stdio: captureStdout ? ["ignore", "pipe", "pipe"] : "inherit",
+    });
+
+    let stdout = "";
+    let stderr = "";
+    if (captureStdout && p.stdout)
+      p.stdout.on("data", (d) => (stdout += d.toString()));
+    if (captureStdout && p.stderr)
+      p.stderr.on("data", (d) => (stderr += d.toString()));
+
+    p.on("close", (code) => {
+      resolve({ code: code ?? 0, stdout, stderr });
+    });
+  });
+}
+
+/** Parse JSON from a string that may have extra logs around it */
+function safeParseJson<T = any>(s: string): T {
+  try {
+    return JSON.parse(s);
+  } catch {}
+  const start = s.indexOf("{");
+  const end = s.lastIndexOf("}");
+  if (start >= 0 && end > start) {
+    return JSON.parse(s.slice(start, end + 1));
+  }
+  throw new Error(`Could not parse JSON from:\n${s}`);
+}
+
+// ---------------------- graph nodes ----------------------
+
+/** answers.json -> out/answers.ttl */
+async function nodeAnswersToRdf(state: AgentState): Promise<Partial<AgentState>> {
+  // ensure answers.json exists
+  try {
+    await fs.access(state.paths.answersJson);
+  } catch {
+    await fs.writeFile(
+      state.paths.answersJson,
+      JSON.stringify({ form: state.formId, values: {} }, null, 2) + "\n",
+      "utf8"
+    );
+  }
+
+  const args = [
+    state.paths.answersToRdf,
+    "--json",
+    state.paths.answersJson,
+    "--out",
+    state.paths.answersTtl,
+    "--form-id",
+    state.formId,
+  ];
+  const res = await runNode(args);
+  if (res.code !== 0) {
+    throw new Error(`answers-to-rdf failed:\n${res.stderr || res.stdout}`);
+  }
+  return {};
+}
+
+/** instances+shapes+answers -> out/plan.json, then compute next+options */
+async function nodeRdfToPlan(state: AgentState): Promise<Partial<AgentState>> {
+  const args = [
+    state.paths.rdfToPlan,
+    "--instances",
+    state.paths.instances,
+    "--shapes",
+    state.paths.shapes,
+    "--answers",
+    state.paths.answersTtl,
+    "--form-id",
+    state.formId,
+    "--out",
+    state.paths.plan,
+  ];
+  const res = await runNode(args);
+  if (res.code !== 0) {
+    throw new Error(`rdf-to-plan failed:\n${res.stderr || res.stdout}`);
+  }
+
+  const planText = await fs.readFile(state.paths.plan, "utf8");
+  const plan = safeParseJson<Plan>(planText);
+
+  if (plan.status === "complete" || (plan.missingCount ?? 0) === 0) {
+    return { plan, next: null, question: null, options: null };
+  }
+
+  // Ask next-as-json to resolve the next field + options
+  const nextRes = await runNode(
+    [state.paths.nextScript, "--instances", state.paths.instances, "--plan", state.paths.plan],
+    { captureStdout: true }
+  );
+  if (nextRes.code !== 0) {
+    throw new Error(`next-as-json failed:\n${nextRes.stderr || nextRes.stdout}`);
+  }
+
+  const nextInfo = safeParseJson<NextInfo>(nextRes.stdout);
+
+  return {
+    plan,
+    next: nextInfo.path, // local field name
+    question: nextInfo.label,
+    options: nextInfo.options,
+  };
+}
+
+/** Prompt human for the value of the next field */
+function makeAskNode(rl: readline.Interface) {
+  return async (state: AgentState): Promise<Partial<AgentState>> => {
+    const qText = state.question ?? state.next ?? "(no label)";
+    console.log("\n=== Next ===");
+    console.log(qText);
+
+    const opts = state.options ?? [];
+    if (opts.length) {
+      console.log("Options:");
+      for (const o of opts) {
+        console.log(`  [${o.value}] ${o.label}`);
+      }
+    }
+
+    const ans = await rl.question("> ");
+    return { lastAnswer: ans };
+  };
+}
+
+/** Apply the answer into answers.json, coercing integer fields */
+async function nodeUpdateAnswers(state: AgentState): Promise<Partial<AgentState>> {
+  if (!state.next) {
+    console.log("No 'next' field returned; halting.");
+    return {};
+  }
+  const text = await fs.readFile(state.paths.answersJson, "utf8");
+  const obj = safeParseJson<{ form: string; values: Record<string, any> }>(text);
+
+  const field = state.next;
+  let value: any = state.lastAnswer ?? "";
+
+  // Coerce integer fields
+  if (state.integerFields.has(field)) {
+    const trimmed = String(value).trim();
+    if (/^-?\d+$/.test(trimmed)) {
+      value = Number(trimmed);
+    }
+  }
+
+  obj.values[field] = value;
+  await fs.writeFile(state.paths.answersJson, JSON.stringify(obj, null, 2) + "\n", "utf8");
+  return {};
+}
+
+/** Terminal node when plan is complete */
+async function nodeDone(state: AgentState): Promise<Partial<AgentState>> {
+  const p = state.plan!;
+  console.log(
+    `\n✅ All required fields set for ${state.formId} (missing ${p.missingCount ?? 0}/${p.requiredTotal ?? 0})`
+  );
+  return {};
+}
+
+/** Terminal node when plan has no resolvable 'next' */
+async function nodeHalt(state: AgentState): Promise<Partial<AgentState>> {
+  const stat = state.plan?.status ?? "unknown";
+  const miss = state.plan?.missingCount ?? "?";
+  console.log(`No next field available (status: ${stat}, missing: ${miss}). Halting.`);
+  return {};
+}
+
+// ---------------------- main ----------------------
+
+async function main() {
+  console.log(`[FormAgent] starting… ${new Date().toLocaleTimeString()}`);
+
+  // Ensure base files exist
+  await ensureFile(paths.instances);
+  await ensureFile(paths.shapes);
+  await ensureFile(
+    paths.answersJson,
+    JSON.stringify({ form: "form1", values: {} }, null, 2) + "\n"
+  );
+
+  // Load RDF stores
+  const instancesStore = await readTTLAsStore(paths.instances);
+  const shapesStore = await readTTLAsStore(paths.shapes);
+  const integerFields = detectIntegerFields(shapesStore);
+
+  console.log(
+    `[preflight] quads: instances=${instancesStore.size}, shapes=${shapesStore.size}`
+  );
+
+  const baseState: AgentState = {
+    formId: "form1",
+    paths,
+    instancesStore,
+    shapesStore,
+    integerFields,
+  };
+
+  const rl = readline.createInterface({ input, output });
+
+  // Build graph
+  const graph = new StateGraph<AgentState>({
+    channels: {
+      formId: null,
+      paths: null,
+
+      instancesStore: null,
+      shapesStore: null,
+      integerFields: null,
+
+      plan: null,
+      next: null,
+      question: null,
+      options: null,
+      lastAnswer: null,
+    },
+  })
+    .addNode("answersToRdf", nodeAnswersToRdf)
+    .addNode("rdfToPlan", nodeRdfToPlan)
+    .addNode("ask", makeAskNode(rl))
+    .addNode("updateAnswers", nodeUpdateAnswers)
+    .addNode("done", nodeDone)
+    .addNode("halt", nodeHalt)
+
+    // start the graph here
+    .addEdge(START, "answersToRdf")
+
+    // flow
+    .addEdge("answersToRdf", "rdfToPlan")
+    .addConditionalEdges(
+      "rdfToPlan",
+      (s) => {
+        if (s.plan?.status === "complete" || (s.plan && (s.plan.missingCount ?? 0) === 0))
+          return "done";
+        if (!s.next) return "halt";
+        return "ask";
+      },
+      { ask: "ask", halt: "halt", done: "done" }
+    )
+    .addEdge("ask", "updateAnswers")
+    .addEdge("updateAnswers", "answersToRdf")
+    .addEdge("done", END)
+    .addEdge("halt", END);
+
+  // Compile with checkpointing (requires thread_id)
+  const app = graph.compile({ checkpointer: new MemorySaver() });
+
+  // Run once
+  const result = await app.invoke(baseState, {
+    recursionLimit: 200,
+    configurable: { thread_id: `form1-${Date.now()}` },
+  });
+
+  if (result.plan?.status === "complete") {
+    console.log(
+      `\n✅ All required fields set for ${result.formId} (missing ${result.plan.missingCount}/${result.plan.requiredTotal})`
+    );
+  }
+
+  rl.close();
+}
+
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
+

@@ -1,0 +1,6 @@
+{
+  "vehicleValue": "module.exports = (v) => { const n = Number(v); if (!Number.isFinite(n)) return { ok:false, message:'Enter a number' }; if (n < 1 || n > 999999) return { ok:false, message:'Value must be between 1 and 999999' }; return { ok:true, value:n }; };",
+  "is_purchased": "module.exports = (v) => { const s = String(v).toLowerCase(); if (s==='true'||s==='false') return { ok:true, value:(s==='true') }; return { ok:false, message:'Choose Yes or No' }; };",
+  "email": "module.exports = (v)=>{ const s=String(v||'').trim(); if(!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(s)) return { ok:false, message:'Enter a valid email' }; return { ok:true, value:s }; };"
+}
+

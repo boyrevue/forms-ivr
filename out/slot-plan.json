@@ -1,0 +1,48 @@
+{
+  "form": "form1",
+  "status": "incomplete",
+  "next": {
+    "path": "http://example.org/form#is_vehicle_modified",
+    "label": "Does the NISSAN LEAF ACENTA have any modifications?"
+  },
+  "requiredTotal": 9,
+  "missingCount": 9,
+  "missing": [
+    {
+      "path": "http://example.org/form#is_vehicle_modified",
+      "label": "Does the NISSAN LEAF ACENTA have any modifications?"
+    },
+    {
+      "path": "http://example.org/form#vehicleValue",
+      "label": "Roughly how much is the NISSAN LEAF ACENTA worth?"
+    },
+    {
+      "path": "http://example.org/form#is_purchased",
+      "label": "Do you have the NISSAN LEAF ACENTA yet?"
+    },
+    {
+      "path": "http://example.org/form#registered_owner_keeper",
+      "label": "Are you the owner and registered keeper of the NISSAN LEAF ACENTA (or will you be)?"
+    },
+    {
+      "path": "http://example.org/form#usage_type_id",
+      "label": "How do you use the NISSAN LEAF ACENTA?"
+    },
+    {
+      "path": "http://example.org/form#personalMilesPerYear",
+      "label": "How many personal miles does the car do a year?"
+    },
+    {
+      "path": "http://example.org/form#daytime_storage_location_id",
+      "label": "Where is the NISSAN LEAF ACENTA kept during the day?"
+    },
+    {
+      "path": "http://example.org/form#overnight_storage_location_id",
+      "label": "Where is the NISSAN LEAF ACENTA kept during the night?"
+    },
+    {
+      "path": "http://example.org/form#any_other_vehicles_id",
+      "label": "Do you have any other cars?"
+    }
+  ]
+}

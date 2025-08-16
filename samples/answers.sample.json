@@ -1,0 +1,16 @@
+{
+  "is_vehicle_modified": "false",
+  "c_1b1c541f": "0",
+  "vehicleValue": 18000,
+  "is_purchased": "true",
+  "month": "6",
+  "registered_owner_keeper": "true",
+  "ownerId": "10",
+  "registeredKeeperId": "10",
+  "usage_type_id": "3",
+  "personalMilesPerYear": 8000,
+  "daytime_storage_location_id": "2",
+  "overnight_storage_location_id": "2",
+  "any_other_vehicles_id": "1"
+}
+

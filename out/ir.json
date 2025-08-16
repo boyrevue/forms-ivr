@@ -1,0 +1,681 @@
+[
+  {
+    "containerKey": "c:5b446a60",
+    "containerCssPath": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+    "name": "is-vehicle-modified",
+    "id": "mint-radio-id-133",
+    "question": "Does the NISSAN LEAF ACENTA have any modifications?",
+    "controlType": "radio",
+    "answers": [
+      {
+        "value": "true",
+        "label": "Yes",
+        "checked": false,
+        "locator": "#mint-radio-id-133",
+        "visible": true
+      },
+      {
+        "value": "false",
+        "label": "No",
+        "checked": false,
+        "locator": "#mint-radio-id-134",
+        "visible": true
+      }
+    ],
+    "default": null,
+    "constraints": {
+      "required": true
+    },
+    "formatting": {},
+    "help": {
+      "text": "What does this mean?If you or a previous owner has made a change from the manufacturer's original specification, such as alloy wheels, air conditioning, bodywork, exhaust system, suspension, tow bar, roof racks or tinted windows, add it here.If you’re unsure if your car’s been modified, check its previous history to find out.",
+      "source": "tooltip"
+    }
+  },
+  {
+    "containerKey": "c:1065897e",
+    "containerCssPath": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(2) > div:nth-child(1) > div:nth-child(2)",
+    "name": "modifications",
+    "id": "1",
+    "question": "How has the car been modified?",
+    "controlType": "checkbox",
+    "answers": [
+      {
+        "value": "on",
+        "label": "Rear Spoiler/Aerofoil",
+        "checked": false,
+        "locator": "#\\31 ",
+        "visible": true
+      },
+      {
+        "value": "on",
+        "label": "Rear Roof Spoiler",
+        "checked": false,
+        "locator": "#\\32 ",
+        "visible": true
+      },
+      {
+        "value": "on",
+        "label": "Rear Valance",
+        "checked": false,
+        "locator": "#\\33 ",
+        "visible": true
+      },
+      {
+        "value": "on",
+        "label": "Front Spoiler/Air Dam",
+        "checked": false,
+        "locator": "#\\34 ",
+        "visible": true
+      },
+      {
+        "value": "on",
+        "label": "Side Skirts/Sill Skirts",
+        "checked": false,
+        "locator": "#\\35 ",
+        "visible": true
+      },
+      {
+        "value": "on",
+        "label": "Complete Body Kit",
+        "checked": false,
+        "locator": "#\\36 ",
+        "visible": true
+      }
+    ],
+    "default": null,
+    "constraints": {
+      "required": false
+    },
+    "formatting": {},
+    "help": null
+  },
+  {
+    "containerKey": "c:1065897e",
+    "containerCssPath": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(2) > div:nth-child(1) > div:nth-child(2)",
+    "name": null,
+    "id": null,
+    "question": "How has the car been modified?",
+    "controlType": "select",
+    "answers": [
+      {
+        "value": "",
+        "label": "Please select",
+        "checked": false,
+        "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(2) > div:nth-child(1) > div:nth-child(2) :scope > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+        "visible": true
+      },
+      {
+        "value": "0",
+        "label": "Spoilers / Bodykits",
+        "checked": true,
+        "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(2) > div:nth-child(1) > div:nth-child(2) :scope > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+        "visible": true
+      },
+      {
+        "value": "1",
+        "label": "Body modifications",
+        "checked": false,
+        "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(2) > div:nth-child(1) > div:nth-child(2) :scope > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+        "visible": true
+      },
+      {
+        "value": "2",
+        "label": "Paintwork",
+        "checked": false,
+        "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(2) > div:nth-child(1) > div:nth-child(2) :scope > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+        "visible": true
+      },
+      {
+        "value": "3",
+        "label": "Suspension / Steering",
+        "checked": false,
+        "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(2) > div:nth-child(1) > div:nth-child(2) :scope > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+        "visible": true
+      },
+      {
+        "value": "4",
+        "label": "Wheels / Tyres",
+        "checked": false,
+        "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(2) > div:nth-child(1) > div:nth-child(2) :scope > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+        "visible": true
+      },
+      {
+        "value": "5",
+        "label": "Engine / Transmission",
+        "checked": false,
+        "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(2) > div:nth-child(1) > div:nth-child(2) :scope > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+        "visible": true
+      },
+      {
+        "value": "6",
+        "label": "Brakes",
+        "checked": false,
+        "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(2) > div:nth-child(1) > div:nth-child(2) :scope > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+        "visible": true
+      },
+      {
+        "value": "7",
+        "label": "Accessories",
+        "checked": false,
+        "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(2) > div:nth-child(1) > div:nth-child(2) :scope > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+        "visible": true
+      }
+    ],
+    "default": "0",
+    "constraints": {
+      "required": false
+    },
+    "formatting": {},
+    "help": null
+  },
+  {
+    "containerKey": "c:e7fa5707",
+    "containerCssPath": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(2) > div:nth-child(1) > div:nth-child(3)",
+    "name": "vehicleValue",
+    "id": "vehicle-value-control",
+    "question": "Roughly how much is the NISSAN LEAF ACENTA worth?",
+    "controlType": "number",
+    "default": null,
+    "constraints": {
+      "required": true,
+      "min": 1,
+      "max": 999999
+    },
+    "formatting": {},
+    "help": {
+      "text": "How come there's a value already there?To make things easier for you, we use a car industry valuation service to show you how much the car is worth.Not happy with the value?The insurer will normally pay the trade value we have shown you. However, if you think the value is wrong, you can change it.What if there is no value in here?Tell us how much the car would be worth if you sold it today. Or tell us how much you’re buying the car for.",
+      "source": "tooltip"
+    }
+  },
+  {
+    "containerKey": "c:952a36d5",
+    "containerCssPath": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(2) > div:nth-child(1) > div:nth-child(4)",
+    "name": "is-purchased",
+    "id": "mint-radio-id-137",
+    "question": "Do you have the NISSAN LEAF ACENTA yet?",
+    "controlType": "radio",
+    "answers": [
+      {
+        "value": "true",
+        "label": "Yes",
+        "checked": false,
+        "locator": "#mint-radio-id-137",
+        "visible": true
+      },
+      {
+        "value": "false",
+        "label": "No",
+        "checked": false,
+        "locator": "#mint-radio-id-138",
+        "visible": true
+      }
+    ],
+    "default": null,
+    "constraints": {
+      "required": true
+    },
+    "formatting": {},
+    "help": {
+      "text": "What if you don't have the car yet?If you’re looking for insurance for a car you haven’t got yet, that’s no problem – you can search by the make and model of car you’d like.",
+      "source": "tooltip"
+    }
+  },
+  {
+    "containerKey": "c:f08b64f5",
+    "containerCssPath": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(2) > div:nth-child(1) > div:nth-child(5)",
+    "name": "registered-owner-keeper",
+    "id": "mint-radio-id-141",
+    "question": "Are you the owner and registered keeper of the NISSAN LEAF ACENTA (or will you be)?",
+    "controlType": "radio",
+    "answers": [
+      {
+        "value": "true",
+        "label": "Yes",
+        "checked": false,
+        "locator": "#mint-radio-id-141",
+        "visible": true
+      },
+      {
+        "value": "false",
+        "label": "No",
+        "checked": false,
+        "locator": "#mint-radio-id-142",
+        "visible": true
+      }
+    ],
+    "default": null,
+    "constraints": {
+      "required": true
+    },
+    "formatting": {},
+    "help": {
+      "text": "What's the difference between owner and registered keeper?If your name is on the V5C vehicle registration certificate (often called the logbook), you're the registered keeper.If you bought the car, or received it as a gift, you will own it too.Sometimes a company (such as a leasing company) or another person might own a car and be the registered keeper of the car, so please make sure you check your V5C.",
+      "source": "tooltip"
+    }
+  },
+  {
+    "containerKey": "c:155562a9",
+    "containerCssPath": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(1)",
+    "name": "usage-type-id",
+    "id": "mint-radio-id-144",
+    "question": "How do you use the NISSAN LEAF ACENTA?",
+    "controlType": "variants",
+    "variants": [
+      {
+        "type": "radio",
+        "answers": [
+          {
+            "value": "1",
+            "label": "Social only",
+            "checked": false,
+            "locator": "#mint-radio-id-144",
+            "visible": true
+          },
+          {
+            "value": "2",
+            "label": "Social and commuting",
+            "checked": false,
+            "locator": "#mint-radio-id-145",
+            "visible": true
+          },
+          {
+            "value": "_other_",
+            "label": "Other options",
+            "checked": false,
+            "locator": "#mint-radio-id-146",
+            "visible": true
+          }
+        ],
+        "visible": true,
+        "radioName": "usage-type-id"
+      },
+      {
+        "type": "select",
+        "answers": [
+          {
+            "value": "",
+            "label": "Social, commuting and business uses",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(1) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "3",
+            "label": "Business use by the policyholder",
+            "checked": true,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(1) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "4",
+            "label": "Business use by the policyholder's spouse/civil partner",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(1) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "5",
+            "label": "Business use by the policyholder and their spouse/civil partner",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(1) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "6",
+            "label": "Business use by any driver",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(1) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          }
+        ],
+        "visible": true,
+        "selectLocator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(1) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)"
+      }
+    ],
+    "default": null,
+    "constraints": {
+      "required": true
+    },
+    "formatting": {},
+    "help": {
+      "text": "Why does this matter? Insurers look at how you and the named drivers on the policy use your car to work out how much risk there is in insuring it. We'll ask you about the other people you’d like to add to your policy soon. If your partner uses the car for business, but you're not married, choose the final option. See which option most closely matches your needs: Social only – Choose this if you and the named drivers on the policy only use the car for personal driving and never drive to work or to where you study, and never drive for work either. Social and commuting – Choose this if you or a named driver drives to and from a single place of work or where you study, but do no other business travel. Business use by the policyholder – choose this if you use the car on business away from your single place of work. Business use by the policyholder's spouse/civil partner – choose this if your husband or wife uses the car on business away from their single place of work. Business use by the policyholder and their spouse/civil partner – choose this if you both use the car on business away from your individual places of work. Business use by any driver – choose this if anyone else you’re insuring to drive the car uses it for business.",
+      "source": "tooltip"
+    }
+  },
+  {
+    "containerKey": "c:fd87ef4a",
+    "containerCssPath": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(2)",
+    "name": "personalMilesPerYear",
+    "id": "personal-miles-per-year-control",
+    "question": "How many personal miles does the car do a year?",
+    "controlType": "number",
+    "default": null,
+    "constraints": {
+      "required": true,
+      "min": 500,
+      "max": 999999
+    },
+    "formatting": {},
+    "help": {
+      "text": "Wondering how to work this out?We're after the number of miles you think your car will do over the next year.Working out the number of miles your car’s done this year is probably a good starting point. Think about how many miles you usually drive per day or per week, then multiply it up to get a yearly figure. Add in any longer trips, such as visits, weekends away or holidays.",
+      "source": "tooltip"
+    }
+  },
+  {
+    "containerKey": "c:1768ecf5",
+    "containerCssPath": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(3)",
+    "name": "daytime-storage-location-id",
+    "id": "mint-radio-id-151",
+    "question": "Where is the NISSAN LEAF ACENTA kept during the day?",
+    "controlType": "variants",
+    "variants": [
+      {
+        "type": "radio",
+        "answers": [
+          {
+            "value": "8",
+            "label": "On a driveway",
+            "checked": false,
+            "locator": "#mint-radio-id-151",
+            "visible": true
+          },
+          {
+            "value": "6",
+            "label": "Office/Factory car park",
+            "checked": false,
+            "locator": "#mint-radio-id-152",
+            "visible": true
+          },
+          {
+            "value": "10",
+            "label": "On the street (away from home)",
+            "checked": false,
+            "locator": "#mint-radio-id-153",
+            "visible": true
+          },
+          {
+            "value": "_other_",
+            "label": "Other options",
+            "checked": false,
+            "locator": "#mint-radio-id-154",
+            "visible": true
+          }
+        ],
+        "visible": true,
+        "radioName": "daytime-storage-location-id"
+      },
+      {
+        "type": "select",
+        "answers": [
+          {
+            "value": "",
+            "label": "Select from more options",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(3) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "1",
+            "label": "Carport",
+            "checked": true,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(3) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "2",
+            "label": "Locked garage",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(3) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "3",
+            "label": "On the street (near home)",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(3) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "4",
+            "label": "Third party premises",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(3) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "5",
+            "label": "Locked compound",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(3) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "7",
+            "label": "Open public car park",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(3) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "9",
+            "label": "Secure public car park",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(3) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "11",
+            "label": "Unlocked compound",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(3) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "12",
+            "label": "Unlocked garage",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(3) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          }
+        ],
+        "visible": true,
+        "selectLocator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(3) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)"
+      }
+    ],
+    "default": null,
+    "constraints": {
+      "required": true
+    },
+    "formatting": {},
+    "help": {
+      "text": "Why are we asking? Insurers look at where your car is kept during the day to work out how safe it is likely to be while it isn't being driven. What if where I keep it varies? Insurers understand that your car is likely to be kept in different places depending on what you're doing. So pick the answer that is true for most of the time - the one that best reflects where your car is kept during the day.",
+      "source": "tooltip"
+    }
+  },
+  {
+    "containerKey": "c:65b7ab78",
+    "containerCssPath": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(4)",
+    "name": "overnight-storage-location-id",
+    "id": "mint-radio-id-157",
+    "question": "Where is the NISSAN LEAF ACENTA kept during the night?",
+    "controlType": "variants",
+    "variants": [
+      {
+        "type": "radio",
+        "answers": [
+          {
+            "value": "2",
+            "label": "Locked garage",
+            "checked": false,
+            "locator": "#mint-radio-id-157",
+            "visible": true
+          },
+          {
+            "value": "8",
+            "label": "On a driveway",
+            "checked": false,
+            "locator": "#mint-radio-id-158",
+            "visible": true
+          },
+          {
+            "value": "3",
+            "label": "On the street (near home)",
+            "checked": false,
+            "locator": "#mint-radio-id-159",
+            "visible": true
+          },
+          {
+            "value": "10",
+            "label": "On the street (away from home)",
+            "checked": false,
+            "locator": "#mint-radio-id-160",
+            "visible": true
+          },
+          {
+            "value": "_other_",
+            "label": "Other options",
+            "checked": false,
+            "locator": "#mint-radio-id-161",
+            "visible": true
+          }
+        ],
+        "visible": true,
+        "radioName": "overnight-storage-location-id"
+      },
+      {
+        "type": "select",
+        "answers": [
+          {
+            "value": "",
+            "label": "Select from more options",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(4) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "4",
+            "label": "Third party premises",
+            "checked": true,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(4) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "5",
+            "label": "Locked compound",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(4) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "6",
+            "label": "Office/Factory car park",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(4) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "7",
+            "label": "Open public car park",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(4) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "9",
+            "label": "Secure public car park",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(4) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "12",
+            "label": "Unlocked garage",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(4) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "1",
+            "label": "Carport",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(4) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          },
+          {
+            "value": "11",
+            "label": "Unlocked compound",
+            "checked": false,
+            "locator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(4) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)",
+            "visible": true
+          }
+        ],
+        "visible": true,
+        "selectLocator": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(4) :scope > div:nth-of-type(2) > div:nth-of-type(1) > fieldset:nth-of-type(1) > div:nth-of-type(2) > select:nth-of-type(1)"
+      }
+    ],
+    "default": null,
+    "constraints": {
+      "required": true
+    },
+    "formatting": {},
+    "help": {
+      "text": "Why are we asking? Cars are more likely to be broken into at night, so insurers look at how safe your car is overnight to help work out the price of your policy. What if where I keep it varies? Insurers understand that your car might be kept in different places depending on what you're doing. Pick the answer that is true for most of the time - where you most often leave your car at night.",
+      "source": "tooltip"
+    }
+  },
+  {
+    "containerKey": "c:f98f7750",
+    "containerCssPath": "body:nth-child(2) > form:nth-child(1) > div:nth-child(3) > fieldset:nth-child(3) > div:nth-child(2) > div:nth-child(5)",
+    "name": "any-other-vehicles-id",
+    "id": "mint-radio-id-165",
+    "question": "Do you have any other cars?",
+    "controlType": "radio",
+    "answers": [
+      {
+        "value": "1",
+        "label": "No access to any other cars",
+        "checked": false,
+        "locator": "#mint-radio-id-165",
+        "visible": true
+      },
+      {
+        "value": "2",
+        "label": "Own another car",
+        "checked": false,
+        "locator": "#mint-radio-id-166",
+        "visible": true
+      },
+      {
+        "value": "3",
+        "label": "Named driver on another policy",
+        "checked": false,
+        "locator": "#mint-radio-id-167",
+        "visible": true
+      },
+      {
+        "value": "4",
+        "label": "Company car (including social use)",
+        "checked": false,
+        "locator": "#mint-radio-id-168",
+        "visible": true
+      },
+      {
+        "value": "5",
+        "label": "Company car (excluding social use)",
+        "checked": false,
+        "locator": "#mint-radio-id-169",
+        "visible": true
+      }
+    ],
+    "default": null,
+    "constraints": {
+      "required": true
+    },
+    "formatting": {},
+    "help": {
+      "text": "Wondering what to choose?Let us know which of these you drive.Own another car – choose this if you have another car of your own.Named driver on another policy – choose this if you're insured to drive someone else's car.Company car, for business and social use – choose this if you use your company car for social driving too.Company car, for business use only – choose this if you use your company car only for business.Insurers don't need to know if you occasionally drive hire cars or belong to a car club, so don't worry about that.",
+      "source": "tooltip"
+    }
+  }
+]

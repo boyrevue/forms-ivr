@@ -1,0 +1,108 @@
+@prefix : <http://example.org/form#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+:FormShape
+  a sh:NodeShape ;
+  sh:targetClass :Form .
+
+:is_vehicle_modifiedShape a sh:PropertyShape ;
+  sh:path :is_vehicle_modified ;
+  sh:name "Does the NISSAN LEAF ACENTA have any modifications?" ;
+  sh:datatype xsd:string ;
+  sh:minCount 1 ;
+  sh:in ( "true" "false" ) 
+.
+:FormShape sh:property :is_vehicle_modifiedShape .
+
+:modificationsShape a sh:PropertyShape ;
+  sh:path :modifications ;
+  sh:name "How has the car been modified?" ;
+  sh:datatype xsd:string ;
+  sh:in ( "on" ) 
+.
+:FormShape sh:property :modificationsShape .
+
+:c_1065897eShape a sh:PropertyShape ;
+  sh:path :c_1065897e ;
+  sh:name "How has the car been modified?" ;
+  sh:datatype xsd:string ;
+  sh:in ( "0" "1" "2" "3" "4" "5" "6" "7" ) 
+.
+:FormShape sh:property :c_1065897eShape .
+
+:vehicleValueShape a sh:PropertyShape ;
+  sh:path :vehicleValue ;
+  sh:name "Roughly how much is the NISSAN LEAF ACENTA worth?" ;
+  sh:datatype xsd:integer ;
+  sh:minCount 1 ;
+  sh:minInclusive 1 ;
+  sh:maxInclusive 999999 
+.
+:FormShape sh:property :vehicleValueShape .
+
+:is_purchasedShape a sh:PropertyShape ;
+  sh:path :is_purchased ;
+  sh:name "Do you have the NISSAN LEAF ACENTA yet?" ;
+  sh:datatype xsd:string ;
+  sh:minCount 1 ;
+  sh:in ( "true" "false" ) 
+.
+:FormShape sh:property :is_purchasedShape .
+
+:registered_owner_keeperShape a sh:PropertyShape ;
+  sh:path :registered_owner_keeper ;
+  sh:name "Are you the owner and registered keeper of the NISSAN LEAF ACENTA (or will you be)?" ;
+  sh:datatype xsd:string ;
+  sh:minCount 1 ;
+  sh:in ( "true" "false" ) 
+.
+:FormShape sh:property :registered_owner_keeperShape .
+
+:usage_type_idShape a sh:PropertyShape ;
+  sh:path :usage_type_id ;
+  sh:name "How do you use the NISSAN LEAF ACENTA?" ;
+  sh:datatype xsd:string ;
+  sh:minCount 1 ;
+  sh:in ( "1" "2" "_other_" "3" "4" "5" "6" ) 
+.
+:FormShape sh:property :usage_type_idShape .
+
+:personalMilesPerYearShape a sh:PropertyShape ;
+  sh:path :personalMilesPerYear ;
+  sh:name "How many personal miles does the car do a year?" ;
+  sh:datatype xsd:integer ;
+  sh:minCount 1 ;
+  sh:minInclusive 500 ;
+  sh:maxInclusive 999999 
+.
+:FormShape sh:property :personalMilesPerYearShape .
+
+:daytime_storage_location_idShape a sh:PropertyShape ;
+  sh:path :daytime_storage_location_id ;
+  sh:name "Where is the NISSAN LEAF ACENTA kept during the day?" ;
+  sh:datatype xsd:string ;
+  sh:minCount 1 ;
+  sh:in ( "8" "6" "10" "_other_" "1" "2" "3" "4" "5" "7" "9" "11" "12" ) 
+.
+:FormShape sh:property :daytime_storage_location_idShape .
+
+:overnight_storage_location_idShape a sh:PropertyShape ;
+  sh:path :overnight_storage_location_id ;
+  sh:name "Where is the NISSAN LEAF ACENTA kept during the night?" ;
+  sh:datatype xsd:string ;
+  sh:minCount 1 ;
+  sh:in ( "2" "8" "3" "10" "_other_" "4" "5" "6" "7" "9" "12" "1" "11" ) 
+.
+:FormShape sh:property :overnight_storage_location_idShape .
+
+:any_other_vehicles_idShape a sh:PropertyShape ;
+  sh:path :any_other_vehicles_id ;
+  sh:name "Do you have any other cars?" ;
+  sh:datatype xsd:string ;
+  sh:minCount 1 ;
+  sh:in ( "1" "2" "3" "4" "5" ) 
+.
+:FormShape sh:property :any_other_vehicles_idShape .
+
