@@ -34,11 +34,14 @@
     "playwright:browsers:all": "playwright install chromium firefox webkit",
     "rdf:serve:fuseki": "docker run --rm -p 3030:3030 -e ADMIN_PASSWORD=admin apache/jena-fuseki",
 
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/server.js",
+    "agent:serve": "tsx src/server.ts",
+    "form:dev": "tsx watch src/runFormAgent.ts"
+
     "typecheck": "tsc --noEmit",
     "test": "echo \"No tests yet\" && exit 0",
 
-    "build": "tsc -p tsconfig.json",
-    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",
