@@ -1,5 +1,6 @@
 // src/voice/index.ts
 import { Express } from "express";
+import type { Request, Response } from "express";
 import twilioRouter from "./twilio";
 import zadarmaRouter from "./zadarma";
 

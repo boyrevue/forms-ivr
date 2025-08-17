@@ -15,7 +15,7 @@ function validateTwilio(_req: Request): boolean {
   return true;
 }
 
-router.post("/call", async (req, res) => {
+router.post("/call", async (req: Request, res: Response) => {
   if (!validateTwilio(req)) return res.status(403).end();
 
   const state = await fetchLocal("/dialog/state");
@@ -37,7 +37,7 @@ router.post("/call", async (req, res) => {
   );
 });
 
-router.post("/collect", async (req, res) => {
+router.post("/collect", async (req: Request, res: Response) => {
   if (!validateTwilio(req)) return res.status(403).end();
 
   const transcript = (req.body?.SpeechResult ?? req.body?.Digits ?? "").toString().trim();
