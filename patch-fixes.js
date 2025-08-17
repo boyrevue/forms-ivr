@@ -1,71 +1,49 @@
-// patch-fixes.js
-// Run: node patch-fixes.js
-// Applies all fixes for normalizer.ts, runFormAgent.ts, and missing n3 types.
+// fix-express-types.js
+import fs from "fs";
+import path from "path";
 
-import fs from "node:fs/promises";
-import path from "node:path";
+const SRC_DIR = "./src";
 
-async function patchNormalizer() {
-  const file = "src/dialog/normalizer.ts";
-  try {
-    let text = await fs.readFile(file, "utf8");
-    if (text.includes("norm(o.value)")) {
-      text = text.replace(/norm\(o\.value\)/g, "norm(String(o.value))");
-      await fs.writeFile(file, text, "utf8");
-      console.log(`✔ Patched ${file}`);
-    } else {
-      console.log(`ℹ ${file} already patched or pattern not found`);
+function walk(dir) {
+  let results = [];
+  const list = fs.readdirSync(dir);
+  list.forEach((file) => {
+    file = path.resolve(dir, file);
+    const stat = fs.statSync(file);
+    if (stat && stat.isDirectory()) {
+      results = results.concat(walk(file));
+    } else if (file.endsWith(".ts")) {
+      results.push(file);
     }
-  } catch (e) {
-    console.warn(`⚠ Skipping ${file}: ${e.message}`);
-  }
+  });
+  return results;
 }
 
-async function patchRunFormAgent() {
-  const file = "src/runFormAgent.ts";
-  try {
-    let text = await fs.readFile(file, "utf8");
+function patchFile(file) {
+  let text = fs.readFileSync(file, "utf8");
+  let orig = text;
 
-    // Fix addEdge(START, ...)
-    text = text.replace(/\.addEdge\(\s*START\s*,/g, ".addEdge(START as any,");
-
-    // Force safeParseJson<Plan>
+  // Ensure express import includes types
+  if (text.includes(`from "express"`) && !text.includes("Request")) {
     text = text.replace(
-      /const plan = safeParseJson<Plan>\(planText\);/g,
-      "const plan = safeParseJson<Plan>(planText) as Plan;"
+      /from "express";/,
+      `from "express";\nimport type { Request, Response } from "express";`
     );
+  }
 
-    // Fix final check on result.plan
-    text = text.replace(
-      /if \(result\.plan\?\.(status.*?)\)/g,
-      "if ((result.plan as Plan)?.status$1)"
-    );
+  // Fix (req, res) =>   to (req: Request, res: Response) =>
+  text = text.replace(
+    /\(\s*req\s*,\s*res\s*\)\s*=>/g,
+    "(req: Request, res: Response) =>"
+  );
 
-    await fs.writeFile(file, text, "utf8");
+  if (text !== orig) {
+    fs.writeFileSync(file, text, "utf8");
     console.log(`✔ Patched ${file}`);
-  } catch (e) {
-    console.warn(`⚠ Skipping ${file}: ${e.message}`);
   }
 }
 
-async function addN3Types() {
-  const file = "src/types/n3.d.ts";
-  try {
-    await fs.mkdir(path.dirname(file), { recursive: true });
-    await fs.writeFile(file, 'declare module "n3";\n', "utf8");
-    console.log(`✔ Added ${file}`);
-  } catch (e) {
-    console.warn(`⚠ Could not write ${file}: ${e.message}`);
-  }
-}
+walk(SRC_DIR).forEach(patchFile);
 
-async function main() {
-  console.log("🔧 Applying patches...");
-  await patchNormalizer();
-  await patchRunFormAgent();
-  await addN3Types();
-  console.log("✅ All patches applied");
-}
-
-main();
+console.log("✅ All express type fixes applied.");
 

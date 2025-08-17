@@ -53,8 +53,8 @@ type AgentState = {
   prefix: typeof PREFIX;
   paths: typeof paths;
 
-  instancesStore: Store;
-  shapesStore: Store;
+  instancesStore: InstanceType<typeof Store>;
+  shapesStore: InstanceType<typeof Store>;
   integerFields: Set<string>;
 
   plan?: Plan;
@@ -74,7 +74,7 @@ async function ensureFile(p: string, contents = "") {
   }
 }
 
-async function readTTLAsStore(file: string): Promise<Store> {
+async function readTTLAsStore(file: string): Promise<InstanceType<typeof Store>> {
   const text = await fs.readFile(file, "utf8");
   const store = new Store();
   const parser = new Parser();
@@ -82,13 +82,13 @@ async function readTTLAsStore(file: string): Promise<Store> {
   return store;
 }
 
-function countQuads(store: Store): number {
+function countQuads(store: InstanceType<typeof Store>): number {
   // @ts-ignore N3.Store quads
   const q: Quad[] = store.getQuads(null, null, null, null);
   return q.length;
 }
 
-function detectIntegerFields(shapes: Store): Set<string> {
+function detectIntegerFields(shapes: InstanceType<typeof Store>): Set<string> {
   const set = new Set<string>();
   const quads = shapes.getQuads(null, DataFactory.namedNode(`${SH}property`), null, null);
   for (const q of quads) {
@@ -349,7 +349,7 @@ async function main() {
       lastAnswer: null,
     },
   })
-    .addEdge(START as any, "answersToRdf")
+    .addEdge(START as any, "answersToRdf" as any)
     .addNode("answersToRdf", nodeAnswersToRdf)
     .addNode("rdfToPlan", nodeRdfToPlan)
     .addNode("ask", makeAskNode(rl))
@@ -367,7 +367,7 @@ async function main() {
       { ask: "ask", halt: "halt", done: "done" }
     )
     .addEdge("ask", "updateAnswers")
-    .addEdge("updateAnswers", "answersToRdf")
+    .addEdge("updateAnswers", "answersToRdf" as any)
     .addEdge("done", END)
     .addEdge("halt", END);
 
@@ -378,9 +378,9 @@ async function main() {
     configurable: { thread_id: `form1-${Date.now()}` },
   });
 
-  if ((result.plan as Plan)?.statusstatus === "complete") {
+  if ((result.plan as Plan)?.status === "complete") {
     console.log(
-      `\n✅ All required fields set for ${result.formId} (missing ${result.plan.missingCount}/${result.plan.requiredTotal})`
+      `\n✅ All required fields set for ${result.formId} (missing ${(result.plan as Plan).missingCount}/${(result.plan as Plan).requiredTotal})`
     );
   }
 

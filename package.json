@@ -10,30 +10,23 @@
   },
   "scripts": {
     "postinstall": "playwright install chromium",
-
     "extract-ir": "node ./scripts/extract-ir.mjs",
     "extract-ir:debug": "PWDEBUG=1 node ./scripts/extract-ir.mjs --url https://example.com/signup --out ./ir.json",
     "ir:to-rdf": "node ./scripts/ir-to-rdf.mjs --in ./ir.json --out ./out --form-id form1",
     "ir:to-jsonld": "node ./scripts/ir-to-jsonld.mjs --in ./ir.json --out ./out/ir.jsonld",
-
     "rdf:answers:sample": "node ./scripts/answers-to-rdf.mjs --json ./samples/answers.sample.json --out ./out/answers.ttl --form-id form1",
     "rdf:validate": "node ./scripts/validate.mjs --form-id form1 --instances ./out/instances.ttl --answers ./out/answers.ttl",
-
     "plan:build": "node ./scripts/rdf-to-plan.mjs --instances ./out/instances.ttl --shapes ./out/shapes.ttl --form-id form1 --out ./out/slot-plan.json",
     "plan:next": "node ./scripts/next-as-json.mjs --instances ./out/instances.ttl --plan ./out/slot-plan.json --answers ./out/answers.ttl",
     "plan:question": "node ./scripts/plan-to-question.mjs --plan ./out/slot-plan.json --instances ./out/instances.ttl --shapes ./out/shapes.ttl --field next",
-
     "sparql:fields": "node ./scripts/sparql.mjs fields",
     "sparql:options:usage": "node ./scripts/sparql.mjs options usage_type_id",
-
     "form:dev": "tsx watch src/runFormAgent.ts",
     "agent:serve": "tsx src/server.ts",
-
     "rdf:print": "bash -lc 'test -f ./out/instances.ttl && cat ./out/instances.ttl; echo; echo ---; test -f ./out/shapes.ttl && cat ./out/shapes.ttl'",
     "playwright:install": "playwright install",
     "playwright:browsers:all": "playwright install chromium firefox webkit",
     "rdf:serve:fuseki": "docker run --rm -p 3030:3030 -e ADMIN_PASSWORD=admin apache/jena-fuseki",
-
     "build": "tsc -p tsconfig.build.json",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit",
@@ -52,6 +45,7 @@
   },
   "devDependencies": {
     "@comunica/query-sparql": "^4.3.0",
+    "@types/express": "^5.0.3",
     "@types/minimist": "^1.2.5",
     "@types/node": "^24.3.0",
     "n3": "^1.26.0",
@@ -64,4 +58,3 @@
   },
   "packageManager": "pnpm@9.15.9+sha512.68046141893c66fad01c079231128e9afb89ef87e2691d69e4d40eee228988295fd4682181bae55b58418c3a253bde65a505ec7c5f9403ece5cc3cd37dcf2531"
 }
-
