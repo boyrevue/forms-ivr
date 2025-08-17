@@ -18,7 +18,7 @@ export function normalizeValue(raw: any, slot: NextSlot): any {
       String(s).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
     const nRaw = norm(String(raw));
     const found =
-      slot.options.find((o) => norm(o.value) === nRaw) ||
+      slot.options.find((o) => norm(String(o.value)) === nRaw) ||
       slot.options.find((o) => norm(o.label) === nRaw) ||
       slot.options.find((o) => norm(o.label).startsWith(nRaw));
     if (found) {

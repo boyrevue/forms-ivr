@@ -1,4 +1,8 @@
 // src/runFormAgent.ts
+
+// Temporary loose typing
+type AnyObject = Record<string, any>;
+
 import fs from "node:fs/promises";
 import path from "node:path";
 import { spawn } from "node:child_process";
@@ -210,7 +214,7 @@ async function nodeRdfToPlan(state: AgentState): Promise<Partial<AgentState>> {
   if (VERBOSE) process.stdout.write(res.stdout);
 
   const planText = await fs.readFile(state.paths.plan, "utf8");
-  const plan = safeParseJson<Plan>(planText);
+  const plan = safeParseJson<Plan>(planText) as Plan;
   if (VERBOSE) console.log("[rdfToPlan] plan:", JSON.stringify(plan, null, 2));
 
   if (plan.status === "complete" || (plan.missingCount ?? 0) === 0) {
@@ -345,7 +349,7 @@ async function main() {
       lastAnswer: null,
     },
   })
-    .addEdge(START, "answersToRdf")
+    .addEdge(START as any, "answersToRdf")
     .addNode("answersToRdf", nodeAnswersToRdf)
     .addNode("rdfToPlan", nodeRdfToPlan)
     .addNode("ask", makeAskNode(rl))
@@ -374,7 +378,7 @@ async function main() {
     configurable: { thread_id: `form1-${Date.now()}` },
   });
 
-  if (result.plan?.status === "complete") {
+  if ((result.plan as Plan)?.statusstatus === "complete") {
     console.log(
       `\n✅ All required fields set for ${result.formId} (missing ${result.plan.missingCount}/${result.plan.requiredTotal})`
     );
