@@ -37,7 +37,7 @@
     "build": "tsc -p tsconfig.build.json",
     "start": "node dist/server.js",
     "agent:serve": "tsx src/server.ts",
-    "form:dev": "tsx watch src/runFormAgent.ts"
+    "form:dev": "tsx watch src/runFormAgent.ts",
 
     "typecheck": "tsc --noEmit",
     "test": "echo \"No tests yet\" && exit 0",
