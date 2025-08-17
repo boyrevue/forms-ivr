@@ -1,0 +1,7 @@
+PUBLIC_BASE_URL=https://your.domain.tld
+# Twilio (optional verification)
+TWILIO_AUTH_TOKEN=...                  # from Twilio Console
+TWILIO_PUBLIC_WEBHOOK_URL=https://your.domain.tld/voice/twilio/call
+# Zadarma (optional verification)
+ZADARMA_SECRET=...                     # per your scenario
+

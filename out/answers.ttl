@@ -1,12 +1,4 @@
 @prefix : <http://example.org/form#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 :form1
-  :is_vehicle_modified "false" ;
-  :vehicleValue "false" ;
-  :is_purchased 12000 ;
-  :registered_owner_keeper "true" ;
-  :usage_type_id "true" ;
-  :personalMilesPerYear 1 ;
-  :daytime_storage_location_id 8000 ;
-  :overnight_storage_location_id 1 ;
-  :any_other_vehicles_id 2 .
+  :is_vehicle_modified "false" .

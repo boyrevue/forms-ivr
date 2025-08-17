@@ -48,7 +48,7 @@
   "devDependencies": {
     "@comunica/query-sparql": "^4.3.0",
     "@types/minimist": "^1.2.5",
-    "@types/node": "^24.2.1",
+    "@types/node": "^24.3.0",
     "n3": "^1.26.0",
     "node-red": "^4.1.0",
     "node-red-dashboard": "^3.6.6",
