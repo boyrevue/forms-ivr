@@ -36,16 +36,9 @@
 
     "build": "tsc -p tsconfig.build.json",
     "start": "node dist/server.js",
-    "agent:serve": "tsx src/server.ts",
-    "form:dev": "tsx watch src/runFormAgent.ts",
-
     "typecheck": "tsc --noEmit",
-    "test": "echo \"No tests yet\" && exit 0",
-
+    "test": "echo \"No tests yet\" && exit 0"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@langchain/langgraph": "^0.4.4",
     "@langchain/langgraph-checkpoint": "^0.1.0",
