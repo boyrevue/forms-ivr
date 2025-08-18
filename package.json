@@ -37,6 +37,8 @@
     "@langchain/langgraph-checkpoint": "^0.1.0",
     "@rdfjs/dataset": "^2.0.2",
     "@zazuko/env": "^3.0.1",
+    "ask-sdk-core": "^2.14.0",
+    "ask-sdk-express-adapter": "^2.14.0",
     "express": "5.1.0",
     "langchain": "^0.3.30",
     "minimist": "1.2.8",

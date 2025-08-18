@@ -1,21 +1,14 @@
-// src/voice/index.ts
-import { Express } from "express";
-import type { Request, Response } from "express";
-import twilioRouter from "./twilio";
-import zadarmaRouter from "./zadarma";
+import type { Express } from "express";
+import twilio from "./twilio";
+import zadarma from "./zadarma";
+import { registerAlexa } from "./alexa";
+import { registerGoogle } from "./google";
 
-/**
- * Mount enabled voice provider routes under /voice/*
- */
 export function registerVoiceRoutes(app: Express) {
-  if (process.env.ENABLE_TWILIO) {
-    app.use("/voice/twilio", twilioRouter);
-  }
-  if (process.env.ENABLE_ZADARMA) {
-    app.use("/voice/zadarma", zadarmaRouter);
-  }
+  if (!process.env.DISABLE_TWILIO) app.use("/voice/twilio", twilio);
+  if (!process.env.DISABLE_ZADARMA) app.use("/voice/zadarma", zadarma);
+  if (!process.env.DISABLE_ALEXA) registerAlexa(app);
+  if (!process.env.DISABLE_GOOGLE) registerGoogle(app);
 }
 
-// Barrel exports so you can import directly if needed
-export { twilioRouter, zadarmaRouter };
-
+export { registerAlexa, registerGoogle };
